@@ -169,7 +169,8 @@ class BingNewsScraper extends Scraper {
 
         // perform queries
         const results = [];
-        $('#algocore .newsitem').each((i, link) => {
+
+        $('#news .news-card').each((i, link) => {
             results.push({
                 link: $(link).attr('url'),
                 title: $(link).find('a.title').text(),
@@ -212,21 +213,12 @@ class BingNewsScraper extends Scraper {
     }
 
     async next_page() {
-        let next_page_link = await this.page.$('.sb_pagN', {timeout: 1000});
-        if (!next_page_link) {
-            return false;
-        }
-
-        this.last_response = await Promise.all([
-            next_page_link.click(), // The promise resolves after navigation has finished
-            this.page.waitForNavigation(), // Clicking the link will indirectly cause a navigation
-        ]);
-
+        await this.page.evaluate('window.scrollBy(0, 99999)');
         return true;
     }
 
     async wait_for_results() {
-        await this.page.waitForSelector('#news', { timeout: this.STANDARD_TIMEOUT });
+        await this.page.waitForSelector('#news .news-card', { timeout: this.STANDARD_TIMEOUT });
     }
 
     async detected() {

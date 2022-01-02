@@ -95,7 +95,7 @@ class ScrapeManager {
                     new transports.Console()
                 ]
             }),
-            keywords: ['nodejs rocks',],
+            keywords: [],
             // whether to start the browser in headless mode
             headless: true,
             // specify flags passed to chrome here
@@ -123,7 +123,7 @@ class ScrapeManager {
             html_output: false,
             // whether to strip JS and CSS from the html_output
             // has only an effect if `html_output` is true
-            clean_html_output: true,
+            clean_html_output: false,
             // remove all data images from the html
             clean_data_images: true,
             // whether to return a screenshot of serp pages as b64 data
@@ -132,7 +132,7 @@ class ScrapeManager {
             scrape_from_file: '',
             // whether to prevent images, css, fonts and media from being loaded
             // will speed up scraping a great deal
-            block_assets: true,
+            block_assets: false,
             // path to js module that extends functionality
             // this module should export the functions:
             // get_browser, handle_metadata, close_browser
