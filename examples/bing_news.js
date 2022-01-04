@@ -9,8 +9,9 @@ const se_scraper = require('./../index.js');
     let scrape_job = {
         search_engine: 'bing_news',
         keywords: kws,
-        num_pages: 1,
-        headless: false
+        num_pages: 2,
+        headless: false,
+        paginate: false
     };
 
     var results = await se_scraper.scrape({}, scrape_job);

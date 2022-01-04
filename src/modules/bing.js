@@ -176,11 +176,7 @@ class BingNewsScraper extends Scraper {
                 link: $(link).attr('url'),
                 title: $(link).find('a.title').text(),
                 snippet: $(link).find('.snippet').text(),
-                date: $(link).find('.source span').last().text(),
-                source: {
-                    name: $(link).find('.source a').text(),
-                    logoUrl: $(link).find('.source img').attr('src')
-                }
+                date: $(link).find('.source span').last().text()
             };
 
             if (relativeImageUrl) {

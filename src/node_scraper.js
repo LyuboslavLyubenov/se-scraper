@@ -80,7 +80,9 @@ class ScrapeManager {
             // how long to sleep between requests. a random sleep interval within the range [a,b]
             // is drawn before every request. empty string for no sleeping.
             sleep_range: null,
-            // which search engine to scrape
+            /**
+             * which search engine to scrape
+             */
             search_engine: 'google',
             search_engine_name: 'google',
             logger: createLogger({
@@ -95,11 +97,18 @@ class ScrapeManager {
                     new transports.Console()
                 ]
             }),
+            /**
+             * Combination of string that will be used in a search
+             */
             keywords: [],
-            // whether to start the browser in headless mode
+            /**
+             * whether to start the browser in headless mode
+             */
             headless: true,
-            // specify flags passed to chrome here
-            // About our defaults values https://peter.sh/experiments/chromium-command-line-switches/
+            /**
+             * specify flags passed to chrome here
+               About our defaults values https://peter.sh/experiments/chromium-command-line-switches/
+             */
             chrome_flags: [
                 '--disable-infobars',
                 '--window-position=0,0',
@@ -115,7 +124,9 @@ class ScrapeManager {
                 '--hide-scrollbars',
                 '--disable-notifications',
             ],
-            // the number of pages to scrape for each keyword
+            /**
+             * the number of pages to scrape for each keyword
+             */
             num_pages: 1,
             // path to output file, data will be stored in JSON
             output_file: '',
@@ -130,36 +141,55 @@ class ScrapeManager {
             screen_output: false,
             // Scrape url from local file. Mainly used for testing.
             scrape_from_file: '',
-            // whether to prevent images, css, fonts and media from being loaded
-            // will speed up scraping a great deal
+            /**
+             * whether to prevent images, css, fonts and media from being loaded
+             * will speed up scraping a great deal
+             */
             block_assets: true,
-            // path to js module that extends functionality
-            // this module should export the functions:
-            // get_browser, handle_metadata, close_browser
-            //custom_func: resolve('examples/pluggable.js'),
+            /**
+             * path to js module that extends functionality
+             * this module should export the functions:
+             * get_browser, handle_metadata, close_browser
+             * custom_func: resolve('examples/pluggable.js'),
+             */
             custom_func: null,
             throw_on_detection: false,
-            // List of proxies to use ['socks5://78.94.172.42:1080', 'http://localhost:1080']
+            /**
+            List of proxies to use ['socks5://78.94.172.42:1080', 'http://localhost:1080']
+             * 
+             */
             proxies: null,
-            // a file with one proxy per line. Example:
-            // socks5://78.94.172.42:1080
-            // http://118.174.233.10:48400
+            /**
+             * a file with one proxy per line. Example:
+                socks5://78.94.172.42:1080
+                http://118.174.233.10:48400
+             */
             proxy_file: '',
-            // whether to use proxies only
-            // when this is set to true, se-scraper will not use
-            // your default IP address
+            /**
+                whether to use proxies only
+                when this is set to true, se-scraper will not use
+                your default IP address
+             */
             use_proxies_only: false,
-            // check if headless chrome escapes common detection techniques
-            // this is a quick test and should be used for debugging
+            /**
+             * check if headless chrome escapes common detection techniques
+             * this is a quick test and should be used for debugging
+             */
             test_evasion: false,
             apply_evasion_techniques: true,
-            // settings for puppeteer-cluster
+            /**
+             * settings for puppeteer-cluster
+             */
             puppeteer_cluster_config: {
                 timeout: 30 * 60 * 1000, // max timeout set to 30 minutes
                 monitor: false,
                 concurrency: Cluster.CONCURRENCY_BROWSER,
                 maxConcurrency: 1,
-            }
+            },
+            /**
+             * Groups scraped result in pages in the output. Setting to false will make it into one array
+             */
+            paginate: true,
         });
 
         this.logger = this.config.logger;

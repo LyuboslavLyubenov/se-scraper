@@ -180,7 +180,7 @@ module.exports = class Scraper {
                 this.num_requests++;
 
                 do {
-
+                    const writePath = this.config.paginate ? this.page_num : 'total';
                     this.logger.info(`${this.config.search_engine_name} scrapes keyword "${keyword}" on page ${this.page_num}`);
 
                     await this.wait_for_results();
@@ -191,10 +191,10 @@ module.exports = class Scraper {
 
                     let html = await this.page.content();
                     let parsed = this.parse(html);
-                    this.results[keyword][this.page_num] = parsed ? parsed : await this.parse_async(html);
+                    this.results[keyword][writePath] = parsed ? parsed : await this.parse_async(html);
 
                     if (this.config.screen_output) {
-                        this.results[keyword][this.page_num].screenshot = await this.page.screenshot({
+                        this.results[keyword][writePath].screenshot = await this.page.screenshot({
                             encoding: 'base64',
                             fullPage: false,
                         });
@@ -243,7 +243,7 @@ module.exports = class Scraper {
                         // https://stackoverflow.com/questions/27841112/how-to-remove-white-space-between-html-tags-using-javascript
                         // TODO: not sure if this is save!
                         html_contents = html_contents.replace(/>\s+</g,'><');
-                        this.results[keyword][this.page_num].html = html_contents;
+                        this.results[keyword][writePath].html = html_contents;
                     }
 
                     this.page_num += 1;
@@ -262,7 +262,6 @@ module.exports = class Scraper {
                     }
 
                 } while (this.page_num <= this.config.num_pages);
-
             } catch (e) {
 
                 this.logger.warn(`Problem with scraping ${keyword} in search engine ${this.config.search_engine_name}: ${e.message}`);
@@ -298,6 +297,8 @@ module.exports = class Scraper {
                 }
             }
         }
+
+
     }
 
     /**
