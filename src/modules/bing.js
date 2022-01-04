@@ -171,12 +171,23 @@ class BingNewsScraper extends Scraper {
         const results = [];
 
         $('#news .news-card').each((i, link) => {
-            results.push({
+            const relativeImageUrl = $(link).find('.image img').attr('src');
+            const resultObj = {
                 link: $(link).attr('url'),
                 title: $(link).find('a.title').text(),
                 snippet: $(link).find('.snippet').text(),
                 date: $(link).find('.source span').last().text(),
-            })
+                source: {
+                    name: $(link).find('.source a').text(),
+                    logoUrl: $(link).find('.source img').attr('src')
+                }
+            };
+
+            if (relativeImageUrl) {
+                resultObj['image'] = 'https://bing.com' + relativeImageUrl;
+            }
+
+            results.push(resultObj);
         });
 
         const cleaned = this.clean_results(results, ['title', 'link']);
