@@ -136,7 +136,7 @@ class ScrapeManager {
             // has only an effect if `html_output` is true
             clean_html_output: false,
             // remove all data images from the html
-            clean_data_images: true,
+            clean_data_images: false,
             // whether to return a screenshot of serp pages as b64 data
             screen_output: false,
             // Scrape url from local file. Mainly used for testing.
@@ -184,7 +184,7 @@ class ScrapeManager {
                 timeout: 30 * 60 * 1000, // max timeout set to 30 minutes
                 monitor: false,
                 concurrency: Cluster.CONCURRENCY_BROWSER,
-                maxConcurrency: 1,
+                maxConcurrency: 2,
             },
             /**
              * Groups scraped result in pages in the output. Setting to false will make it into one array

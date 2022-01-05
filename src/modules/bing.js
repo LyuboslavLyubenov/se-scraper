@@ -226,10 +226,21 @@ class BingNewsScraper extends Scraper {
 
     async wait_for_results() {
         await this.page.waitForSelector('#news .news-card', { timeout: this.STANDARD_TIMEOUT });
-    }
+        const a = await this.page.waitForFunction((pageNum) => {
+            const pageNews = document.querySelectorAll('#news .news-card');
+            const finishedWaiting = (pageNews.length - (pageNum * 10)) >= 10;
+            if (!finishedWaiting) {
+                window.scrollBy({
+                    behavior: 'smooth',
+                    top: 9999
+                });
+            }
+            else {
+                return true;
+                        }
+            return ;
+        }, { }, this.page_num);
 
-    async detected() {
-        // TODO: I was actually never detected by bing news.
     }
 }
 
