@@ -330,9 +330,9 @@ module.exports = class Scraper {
 
     async random_sleep() {
         const [min, max] = this.config.sleep_range;
-        let rand = Math.floor(Math.random() * (max - min + 1) + min); //Generate Random number
-        this.logger.info(`Sleeping for ${rand}s`);
-        await this.sleep(rand * 1000);
+        let rand = Math.floor(Math.random() * (max - min)); //Generate Random number
+        this.logger.info(`Sleeping for ${rand} ms`);
+        await this.sleep(rand);
     }
 
     async set_input_value(selector, value) {

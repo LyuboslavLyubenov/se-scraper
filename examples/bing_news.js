@@ -10,8 +10,8 @@ const se_scraper = require('./../index.js');
         search_engine: 'bing_news',
         keywords: kws,
         num_pages: 2,
-        headless: false,
-        paginate: false
+        paginate: false,
+        sleep_range: [200, 1000]
     };
 
     var results = await se_scraper.scrape({}, scrape_job);
