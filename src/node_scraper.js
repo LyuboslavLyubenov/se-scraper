@@ -196,8 +196,6 @@ class ScrapeManager {
 
         if (config.sleep_range) {
             // parse an array
-            config.sleep_range = eval(config.sleep_range);
-
             if (config.sleep_range.length !== 2 && typeof i[0] !== 'number' && typeof i[1] !== 'number') {
                 throw "sleep_range is not a valid array of two integers.";
             }
