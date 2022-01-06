@@ -184,7 +184,7 @@ class ScrapeManager {
                 timeout: 30 * 60 * 1000, // max timeout set to 30 minutes
                 monitor: false,
                 concurrency: Cluster.CONCURRENCY_BROWSER,
-                maxConcurrency: 2,
+                maxConcurrency: 1,
             },
             /**
              * Groups scraped result in pages in the output. Setting to false will make it into one array
